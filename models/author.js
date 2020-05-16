@@ -22,6 +22,8 @@ AuthorSchema
     return `/catalog/author/${this._id}`;
   });
 
+// TODO: Refactor this properties. Replace them on one lifespan virtual property.
+//       Use it in templates
 AuthorSchema
   .virtual('date_of_birth_formatted')
   .get(function () {
