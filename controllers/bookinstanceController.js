@@ -23,7 +23,6 @@ exports.bookinstance_detail = (req, res, next) => {
         err.status = 404;
         return next(err);
       }
-      console.log(bookinstance);
       res.render(
         'bookinstance_detail',
         { title: `Copy: ${bookinstance.book.title}`, bookinstance },
