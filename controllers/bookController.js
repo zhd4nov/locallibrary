@@ -33,7 +33,6 @@ exports.book_list = (req, res) => {
     .populate('author')
     .exec((err, book_list) => {
       if (err) return next(err);
-      console.log(book_list); // (x)
       res.render('book_list', { title: 'Book list', book_list });
     });
 };
