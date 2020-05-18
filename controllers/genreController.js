@@ -66,11 +66,11 @@ exports.genre_create_post = [
     }
 
     Genre.findOne({ 'name': req.body.name })
-      .exec((err, genre) => {
+      .exec((err, found_genre) => {
         if (err) return next(err);
 
-        if (genre) {
-          res.redirect(genre.url);
+        if (found_genre) {
+          res.redirect(found_genre.url);
         } else {
           genre.save((err) => {
             if (err) return next(err);
