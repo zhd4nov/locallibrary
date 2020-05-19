@@ -24,16 +24,11 @@ AuthorSchema
 
 // TODO: Refactor this properties. Replace them on one lifespan virtual property.
 //       Use it in templates
-AuthorSchema
-  .virtual('date_of_birth_formatted')
-  .get(function () {
-    return moment(this.date_of_birth).format('MMMM Do, YYYY');
-  });
 
 AuthorSchema
-  .virtual('date_of_death_formatted')
+  .virtual('lifespan')
   .get(function () {
-    return moment(this.date_of_death).format('MMMM Do, YYYY');
+    return `${moment(this.date_of_birth).format('MMMM Do, YYYY')} - ${moment(this.date_of_death).format('MMMM Do, YYYY')}`
   });
 
 module.exports = mongoose.model('Author', AuthorSchema);
