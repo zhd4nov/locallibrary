@@ -22,13 +22,22 @@ AuthorSchema
     return `/catalog/author/${this._id}`;
   });
 
-// TODO: Refactor this properties. Replace them on one lifespan virtual property.
-//       Use it in templates
-
 AuthorSchema
   .virtual('lifespan')
   .get(function () {
     return `${moment(this.date_of_birth).format('MMMM Do, YYYY')} - ${moment(this.date_of_death).format('MMMM Do, YYYY')}`
+  });
+
+AuthorSchema
+  .virtual('date_of_birth_yyyy_mm_dd')
+  .get(function () {
+    return `${moment(this.date_of_birth).format('YYYY-MM-DD')}`;
+  });
+
+AuthorSchema
+  .virtual('date_of_death_yyyy_mm_dd')
+  .get(function () {
+    return `${moment(this.date_of_death).format('YYYY-MM-DD')}`;
   });
 
 module.exports = mongoose.model('Author', AuthorSchema);
