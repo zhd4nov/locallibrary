@@ -52,13 +52,11 @@ exports.author_create_get = (req, res) => {
 };
 
 // Create Author - post
-exports.author_create_post = (req, res) => [
+exports.author_create_post = [
   // Validation
-  body('first_name').isLength({ min: 1 }).trim()
-    .withMessage('First name must be specified.')
+  body('first_name').isLength({ min: 1 }).trim().withMessage('First name must be specified.')
     .isAlphanumeric().withMessage('First name has non-alphanumeric characters.'),
-  body('family_name').isLength({ min: 1 }).trim()
-    .withMessage('Family name must be specified.')
+  body('family_name').isLength({ min: 1 }).trim().withMessage('Family name must be specified.')
     .isAlphanumeric().withMessage('Family name has non-alphanumeric characters.'),
   body('date_of_birth', 'Invalid date of birth').optional({ checkFalsy: true }).isISO8601(),
   body('date_of_death', 'Invalid date of death').optional({ checkFalsy: true }).isISO8601(),
@@ -87,21 +85,19 @@ exports.author_create_post = (req, res) => [
       return;
     }
 
-    const author = new Author(
-      {
-        first_name: req.body.first_name,
-        family_name: req.body.family_name,
-        date_of_birth: req.body.date_of_birth,
-        date_of_death: req.body.date_of_death,
-      }
-    );
+    const author = new Author({
+      first_name: req.body.first_name,
+      family_name: req.body.family_name,
+      date_of_birth: req.body.date_of_birth,
+      date_of_death: req.body.date_of_death,
+    });
 
     author.save((err) => {
       if (err) return next(err);
 
       res.redirect(author.url);
     });
-  }
+  },
 ];
 
 // Show removing form - get
